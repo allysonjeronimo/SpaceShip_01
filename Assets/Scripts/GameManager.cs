@@ -22,12 +22,14 @@ public class GameManager : MonoBehaviour
     {
         this.score += pts;
         Debug.Log("Score: " + this.score);
+        UIManager.instance.UpdateScore(score);
     }
 
     public void GameOver()
     {
         isGameOver = true;
         StopSpawnEnemies();
+        UIManager.instance.ShowMenuUI();
     }
 
     private void StartSpawnEnemies()
@@ -50,6 +52,7 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         isSpawnEnemies = false;
+        UIManager.instance.ShowMenuUI();
     }
 
     private void Update()
@@ -60,6 +63,7 @@ public class GameManager : MonoBehaviour
             StartSpawnEnemies();
             Instantiate(playerPrefab);
             this.score = 0;
+            UIManager.instance.ShowGameUI();
         }
     }
 
