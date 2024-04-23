@@ -9,7 +9,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject playerPrefab;
     [SerializeField]
+    private GameObject powerupPrefab;
+
+    [SerializeField]
     private float enemiesInterval = 3f;
+
     private const float X_RANGE_POSITION = 7f;
 
     public static GameManager instance;
@@ -23,7 +27,18 @@ public class GameManager : MonoBehaviour
         this.score += pts;
         Debug.Log("Score: " + this.score);
         UIManager.instance.UpdateScore(score);
+        CheckForPowerUp();
     }
+
+    private void CheckForPowerUp()
+    {
+        int number = Random.Range(1, 11);   
+        if(number > 5)
+        {
+            // Instanciar power up
+        }
+    }
+
 
     public void GameOver()
     {

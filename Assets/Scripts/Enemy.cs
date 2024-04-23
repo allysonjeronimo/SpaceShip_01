@@ -15,5 +15,10 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         this.transform.Translate(Vector3.down * speed * Time.deltaTime);
+    
+        if(this.transform.position.y < -5)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -40,6 +40,8 @@ public class Player : MonoBehaviour
                 this.transform.position.z);
 
             Instantiate(bulletPrefab, position, this.transform.rotation);
+
+            AudioManager.instance.Play(AudioManager.instance.gun);
         }
     }
 
