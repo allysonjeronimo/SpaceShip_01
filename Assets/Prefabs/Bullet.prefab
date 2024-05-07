@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  powerUpPrefab: {fileID: 2129185437688776428, guid: 311b96350a5f03f4c95d7d46a6641cc0,
+    type: 3}
 --- !u!61 &4043897575658009786
 BoxCollider2D:
   m_ObjectHideFlags: 0

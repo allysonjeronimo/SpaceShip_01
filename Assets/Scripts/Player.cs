@@ -16,6 +16,11 @@ public class Player : MonoBehaviour
     private const float SCREEN_BOUNDS_X = 7.9f;
     private const float SCREEN_BOUNDS_Y = 4.2f;
 
+    [SerializeField]
+    private GameObject shield;
+
+    private bool isProtected;
+
     void Start()
     {
         
@@ -84,15 +89,30 @@ public class Player : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject other = collision.gameObject;
 
-        if(other.tag == "Enemy")
+        if(other.tag == "PowerUp")
+        {
+            Destroy(other);
+            StartCoroutine(ActiveShield());
+        }
+
+        if (other.tag == "Enemy" && !isProtected)
         {
             Destroy(this.gameObject);
             Destroy(other);
             GameManager.instance.GameOver();
         }
+    }
+
+    private IEnumerator ActiveShield()
+    {
+        shield.SetActive(true);
+        isProtected = true;
+        yield return new WaitForSeconds(10f);
+        shield.SetActive(false);
+        isProtected = false;
     }
 }
