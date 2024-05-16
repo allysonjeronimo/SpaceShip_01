@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private float enemiesInterval = 3f;
 
     private const float X_RANGE_POSITION = 7f;
+    private const string HI_SCORE_KEY = "hi_score";
 
     public static GameManager instance;
     private bool isGameOver;
@@ -45,6 +46,11 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         StopSpawnEnemies();
         UIManager.instance.ShowMenuUI();
+        // salvar score
+        int hiScore = PlayerPrefs.GetInt(HI_SCORE_KEY, 0);
+        if(this.score > hiScore){
+            PlayerPrefs.SetInt(HI_SCORE_KEY, this.score);
+        }
     }
 
     private void StartSpawnEnemies()
@@ -79,6 +85,7 @@ public class GameManager : MonoBehaviour
             Instantiate(playerPrefab);
             this.score = 0;
             UIManager.instance.ShowGameUI();
+            UIManager.instance.UpdateHiScore(PlayerPrefs.GetInt(HI_SCORE_KEY));
         }
     }
 

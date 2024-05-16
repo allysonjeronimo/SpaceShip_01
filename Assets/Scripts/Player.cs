@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     private const float SCREEN_BOUNDS_X = 7.9f;
     private const float SCREEN_BOUNDS_Y = 4.2f;
 
+    private const float FIRE_RATE_DEFAULT = 0.3f;
+    private const float FIRE_RATE_UPGRADE = 0.1f;
+
     [SerializeField]
     private GameObject shield;
 
@@ -99,6 +102,12 @@ public class Player : MonoBehaviour
             StartCoroutine(ActiveShield());
         }
 
+        if (other.tag == "PowerUpFireRate")
+        {
+            Destroy(other);
+            StartCoroutine(ActiveFireRate());
+        }
+
         if (other.tag == "Enemy" && !isProtected)
         {
             Destroy(this.gameObject);
@@ -114,5 +123,12 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(10f);
         shield.SetActive(false);
         isProtected = false;
+    }
+
+    private IEnumerator ActiveFireRate()
+    {
+        this.fireRate = FIRE_RATE_UPGRADE;
+        yield return new WaitForSeconds(10f);
+        this.fireRate = FIRE_RATE_DEFAULT;
     }
 }

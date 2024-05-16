@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour
     private float speed = 12f;
     [SerializeField]
     private GameObject powerUpPrefab;
+    [SerializeField]
+    private GameObject powerUpFireRatePrefab;
 
     void Start()
     {
@@ -29,10 +31,18 @@ public class Bullet : MonoBehaviour
             GameManager.instance.AddScore(10);
 
             int randomNumber = Random.Range(1, 11);
-            if(randomNumber > 6)
+            if(randomNumber >= 8)
             {
                 Instantiate(
                     powerUpPrefab, 
+                    other.transform.position,
+                    other.transform.rotation
+                );
+            }
+            if(randomNumber >= 5 && randomNumber <= 7)
+            {
+                Instantiate(
+                    powerUpFireRatePrefab,
                     other.transform.position,
                     other.transform.rotation
                 );

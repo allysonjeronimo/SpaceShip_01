@@ -15,6 +15,7 @@ TagManager:
   - PlayerRay
   - Rocket
   - PowerUp
+  - PowerUpFireRate
   layers:
   - Default
   - TransparentFX
